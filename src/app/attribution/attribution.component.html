@@ -1,0 +1,7 @@
+<ng-container *ngIf="attributions$ | async as attributions">
+    <ul>
+        <li *ngFor="let attribution of attributions">
+            <div [innerHTML]="attribution"></div>
+        </li>
+    </ul>
+</ng-container>
