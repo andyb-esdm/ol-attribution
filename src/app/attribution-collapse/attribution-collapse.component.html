@@ -1,0 +1,28 @@
+<!-- <div *ngIf="attributions$ | async as attributions" class="d-inline-flex align-items-end">
+    <div>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="card" [horizontal]="true"
+            style="max-width: 400px">
+            <div style="min-width: 300px" class="card-body">
+                <div *ngFor="let attribution of attributions" class="mx-2">
+                    <div [innerHTML]="attribution"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample">
+        <strong>i</strong>
+    </button>
+</div> -->
+
+<div *ngIf="attributions$ | async as attributions" class="d-inline-flex">
+    <div *ngIf="!isCollapsed" class="bg-secondary-subtle rounded-1 p-1 d-inline-flex">
+        <div *ngFor="let attribution of attributions" class="mx-2">
+            <div [innerHTML]="attribution"></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-primary" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        <strong>i</strong>
+    </button>
+</div>

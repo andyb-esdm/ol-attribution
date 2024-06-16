@@ -7,6 +7,7 @@ import RenderEvent from 'ol/render/Event';
 import OSM, { ATTRIBUTION } from 'ol/source/OSM';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { defaults } from 'ol/control';
+import { BingMaps } from 'ol/source';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,29 @@ export class MapService {
   private readonly attributionsSubject = new BehaviorSubject<string[]>([]);
   attributions$ = this.attributionsSubject.asObservable();
 
+  private bingLayer = new TileLayer({
+    preload: Infinity,
+    source: new BingMaps({
+      key: 'Aga4e1A89vNBHNtP4nBTmHkKEECEgu5zxqVOjdpJ9LMSVoakhoOAOnLs4iNDrSOY',
+      imagerySet: 'AerialWithLabelsOnDemand'
+    })
+  });
+
+  private osmLayer = new TileLayer({
+    source: new OSM({
+      attributions: [
+        'yet more attributions',
+        'test additional attribution - by andyb',
+        ATTRIBUTION
+      ]
+    }),
+  });
+
   readonly map = new Map({
     controls: defaults({ attribution: false }),
     layers: [
-      new TileLayer({
-        source: new OSM({
-          attributions: [
-            'test additional attribution - by andyb',
-            ATTRIBUTION
-          ]
-        }),
-      }),
+      this.bingLayer,
+      this.osmLayer
     ],
     view: new View({
       center: [0, 0],
