@@ -14,7 +14,7 @@ import { BingMaps } from 'ol/source';
 })
 export class MapService {
   private readonly attributionsSubject = new BehaviorSubject<string[]>([]);
-  attributions$ = this.attributionsSubject.asObservable();
+  readonly attributions$ = this.attributionsSubject.asObservable();
 
   private bingLayer = new TileLayer({
     preload: Infinity,
@@ -52,8 +52,6 @@ export class MapService {
       this.updateAttributions(event as RenderEvent);
     });
 
-    // setTimeout(() => this.map.getAllLayers().forEach(layer => layer.setVisible(false)), 5000)
-    // setTimeout(() => this.map.getAllLayers().forEach(layer => layer.setVisible(true)), 6000)
   }
 
   private updateAttributions(event: RenderEvent) {
