@@ -1,7 +1,9 @@
-<ng-container *ngIf="attributions$ | async as attributions">
-    <ul>
-        <li *ngFor="let attribution of attributions">
+<div *ngIf="attributions$ | async as attributions" ngbDropdown placement="top-end" class="d-inline-block"
+    container="body">
+    <button type="button" class="btn btn-primary" id="attributionDropdown" ngbDropdownToggle><strong>i</strong></button>
+    <div ngbDropdownMenu aria-labelledby="attributionDropdown">
+        <div *ngFor="let attribution of attributions" class="mx-2">
             <div [innerHTML]="attribution"></div>
-        </li>
-    </ul>
-</ng-container>
+        </div>
+    </div>
+</div>

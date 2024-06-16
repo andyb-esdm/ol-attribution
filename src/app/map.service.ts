@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Map, MapEvent, View } from 'ol';
+import { Map, View } from 'ol';
 import { ViewStateLayerStateExtent } from 'ol/View';
 import BaseEvent from 'ol/events/Event';
 import TileLayer from 'ol/layer/Tile';
 import RenderEvent from 'ol/render/Event';
-import OSM from 'ol/source/OSM';
+import OSM, { ATTRIBUTION } from 'ol/source/OSM';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { defaults } from 'ol/control';
 
@@ -19,13 +19,19 @@ export class MapService {
     controls: defaults({ attribution: false }),
     layers: [
       new TileLayer({
-        source: new OSM(),
+        source: new OSM({
+          attributions: [
+            'test additional attribution - by andyb',
+            ATTRIBUTION
+          ]
+        }),
       }),
     ],
     view: new View({
       center: [0, 0],
       zoom: 2,
     }),
+
   });
 
   constructor() {
